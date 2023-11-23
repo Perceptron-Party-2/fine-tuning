@@ -7,7 +7,7 @@ import time
 from bnb_config import bnb_config
 from lora_config import lora_config
 
-peft_model_dir="./output/checkpoint-3200"
+peft_model_dir="./genius/checkpoint-1600"
 
 #%%
 MODEL_NAME = "NousResearch/Llama-2-7b-hf"
@@ -23,16 +23,16 @@ m = t.AutoModelForCausalLM.from_pretrained(
 
 m = peft.PeftModel.from_pretrained(m, peft_model_dir)
 
-inputs = tokenizer(
-    "Please suck your mum. ",
-    return_tensors="pt",
-)
-
 device = "cuda"
-
 m.to(device)
 
-with torch.no_grad():
-    inputs = {k: v.to(device) for k, v in inputs.items()}
-    outputs = m.generate(input_ids=inputs["input_ids"], max_new_tokens=500)
-    print(tokenizer.batch_decode(outputs.detach().cpu().numpy(), skip_special_tokens=True))
+
+TEMPLATE = "Below is something that a person has said to you. Write a response to that person.\n\n### Line:\n{line}\n\n### Response:\n"
+LINE = "Why am I here then?"
+prompt = TEMPLATE.format(line = LINE)
+pipe = t.pipeline(task="text-generation", model=m, tokenizer=tokenizer, max_length=500)
+print("pipe(prompt)", pipe(prompt))
+
+
+
+
