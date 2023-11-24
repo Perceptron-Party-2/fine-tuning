@@ -7,6 +7,7 @@
 import transformers as t
 import datasets
 import torch
+import pandas as pd
 
 
 # In[ ]:
