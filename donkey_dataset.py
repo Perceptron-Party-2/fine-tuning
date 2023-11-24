@@ -26,14 +26,6 @@ def create_pairs_list(csv_file):
 
     return pairs_list
 
-# Example usage:
-# Assuming df is your DataFrame
-pairs_list = create_pairs_list('donkey_data.csv')
-
-# Display the list
-print(pairs_list[100])
-
-
 # In[ ]:
 
 
