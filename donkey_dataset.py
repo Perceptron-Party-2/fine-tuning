@@ -69,7 +69,7 @@ class DonkeyDataset(torch.utils.data.Dataset):
 
 if __name__ == '__main__':
     
-    traindataset = ShrekDataset()
+    traindataset = DonkeyDataset()
     i = torch.randint(0, 195, (1,)).item()
     print('max_seq_len:', traindataset.max_sequence_length())
     print('ith input:', traindataset[i])
